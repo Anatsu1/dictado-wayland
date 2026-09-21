@@ -1,0 +1,11 @@
+[Unit]
+Description=ydotoold, con el socket accesible para el usuario del dictado
+
+[Service]
+# install.sh reemplaza UID:GID por los del usuario que instala.
+ExecStart=/usr/bin/ydotoold --socket-path=/run/ydotoold/socket --socket-own=UID:GID
+RuntimeDirectory=ydotoold
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

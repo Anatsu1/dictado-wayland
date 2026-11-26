@@ -51,8 +51,11 @@ paso "Archivos en $DICTADO_HOME"
 mkdir -p "$DICTADO_HOME"
 install -m 755 "$ORIGEN/dictado-toggle.sh" "$DICTADO_HOME/dictado-toggle.sh"
 install -m 644 "$ORIGEN/dictado.py" "$DICTADO_HOME/dictado.py"
-if [ ! -x "$DICTADO_HOME/venv/bin/python" ]; then
-    python3 -m venv "$DICTADO_HOME/venv"
+# El entorno queda atado a la versión de Python con la que se creó: después de una
+# actualización del sistema los paquetes dejan de encontrarse. Si groq no se puede
+# importar (o no hay entorno), se crea de cero.
+if ! "$DICTADO_HOME/venv/bin/python" -c 'import groq' 2>/dev/null; then
+    python3 -m venv --clear "$DICTADO_HOME/venv"
 fi
 "$DICTADO_HOME/venv/bin/pip" install --quiet --upgrade groq
 echo "  Listo."

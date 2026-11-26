@@ -97,6 +97,7 @@ Primero, el log: `cat $XDG_RUNTIME_DIR/dictado.log`.
 | Síntoma | Causa y arreglo |
 |---|---|
 | El atajo no hace nada y no hay log | El comando del atajo apunta a un archivo que no existe. Volver a correr `./install.sh`. |
+| Dejó de transcribir después de actualizar el sistema (`No module named 'groq'` en el log) | Cambió la versión de Python. Volver a correr `./install.sh`, que rehace el entorno. |
 | `failed to connect socket` | `ydotoold` no está corriendo: `systemctl status ydotoold`. |
 | Pega en apps pero no en la terminal | Es lo esperado con Super+D: usar Super+Shift+D. |
 | «No se detectó voz» hablando | Micrófono bajo: bajar `DICTADO_RMS_MINIMO`, o revisar la entrada en Configuración → Sonido. |
